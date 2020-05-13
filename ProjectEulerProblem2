@@ -1,0 +1,16 @@
+import sys
+
+
+t = int(input().strip())
+for a0 in range(t):
+    n = int(input().strip())
+    f=0
+    l=1
+    sm,smeven=0,0
+    while(l<n):
+        sm=f+l
+        if(sm%2==0 and sm<n):
+            smeven+=sm
+        f=l
+        l=sm
+    print(smeven)
