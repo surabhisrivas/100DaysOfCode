@@ -1,0 +1,16 @@
+https://leetcode.com/explore/featured/card/top-interview-questions-easy/92/array/546/
+
+Solution:
+
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        for i in range(len(nums)):
+            r=nums[:i]+nums[i+1:]
+            if(target-nums[i] in r):
+                if nums[i]==target-nums[i]:
+                    val=target-nums[i]
+                    nums[i]='0'
+                else:
+                    val=target-nums[i]
+                return([i,nums.index(val)])
+        
