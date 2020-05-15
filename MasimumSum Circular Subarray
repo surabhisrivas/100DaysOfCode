@@ -1,0 +1,29 @@
+#kadane's algo extended
+
+
+class Solution:
+    def kadane(self,qq):
+        n=len(qq)
+        csum,msum=0,0
+        for i in range(n):
+            csum+=qq[i]
+            if(csum)<0:
+                csum=0
+            if(csum>msum):
+                msum=csum
+        return msum
+    def maxSubarraySumCircular(self, q: List[int]) -> int:
+        f=1
+        for i in range(len(q)):
+            if(q[i]>0):
+                f=0
+        if (f==1):
+            return max(q)
+            
+        mk=self.kadane(q)
+        sm=0
+        for i in range(len(q)):
+            sm+=q[i]
+            q[i]*=-1
+        sm=sm+self.kadane(q)
+        return max(mk,sm)
