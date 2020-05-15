@@ -1,0 +1,49 @@
+
+
+class Tree:
+    def __init__(self,val):
+        self.val=val
+        self.p={}
+        self.end=False
+        
+        
+class Trie:
+
+    def __init__(self):
+        self.root=Tree(None)
+        
+
+    def insert(self, word: str) -> None:
+        parent=self.root
+        for i,ch in enumerate(word):
+            if ch not in parent.p:
+                parent.p[ch]=Tree(ch)
+            parent=parent.p[ch]
+            if(i==len(word)-1):
+                parent.end=True
+        
+
+    def search(self, word: str) -> bool:
+        parent=self.root
+        for ch in word:
+            if ch not in parent.p:
+                return False
+            parent=parent.p[ch]
+        return parent.end
+        
+
+    def startsWith(self, prefix: str) -> bool:
+        parent=self.root
+        for ch in prefix:
+            if ch not in parent.p:
+                return False
+            parent=parent.p[ch]
+        return True
+        
+
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
