@@ -1,0 +1,27 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        if(len(s)==1 or len(s)==0):
+            return s
+        st,en=0,1
+        m=[[0]*len(s) for i in range(len(s))]
+        for i in range(len(s)):         #single length elements are palindrome
+            m[i][i]=1
+        for i in range(len(s)-1):         #marking palindromes of length two
+            if s[i]==s[i+1]:
+                m[i][i+1]=1
+                st=i
+                en=2
+        #s[i...j] is a palindrome iff: 1) s[i]==s[j] 2) m[i+1]==m[j-1]==1
+        k=3
+        for k in range(3,len(s)+1):
+            for i in range(len(s)-k+1):
+                j=i+k-1
+                if(s[i]==s[j] and m[i+1][j-1]):
+                    m[i][j]=1
+                    if(k>en):
+                        st=i
+                        en=k
+            
+        return(s[st:st+en])
+                    
+                
