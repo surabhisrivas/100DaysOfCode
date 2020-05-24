@@ -1,0 +1,16 @@
+class Solution:
+    def BST(self,root,x):
+        if root is None:
+            root=TreeNode(x)
+            return root
+        if root.val>x:
+            root.left=self.BST(root.left,x)
+        else:
+            root.right=self.BST(root.right,x)
+        return root
+        
+    def bstFromPreorder(self, preorder: List[int]) -> TreeNode:
+        root=TreeNode(preorder[0])
+        for i in range(1,len(preorder)):
+            self.BST(root,preorder[i])
+        return root
