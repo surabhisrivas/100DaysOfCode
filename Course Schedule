@@ -1,0 +1,42 @@
+There are a total of numCourses courses you have to take, labeled from 0 to numCourses-1.
+
+Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
+
+Given the total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
+
+ 
+
+Example 1:
+
+Input: numCourses = 2, prerequisites = [[1,0]]
+Output: true
+Explanation: There are a total of 2 courses to take. 
+             To take course 1 you should have finished course 0. So it is possible.
+             
+CODE:
+
+
+
+from collections import defaultdict as d
+class Solution:
+    def canFinish(self, num: int, pre: List[List[int]]) -> bool:
+        indeg=d(set)
+        outdeg=d(set)
+        for i,j in pre:
+            outdeg[j].add(i)
+            indeg[i].add(j)
+        c=0
+        res=[]
+        for i in range(num):
+            if not indeg[i]:
+                res.append(i)
+                c+=1
+        while res:
+            node=res.pop()
+            for x in outdeg[node]:
+                indeg[x].remove(node)
+                if not indeg[x]:
+                    res.append(x)
+                    c+=1
+        return c==num
+            
