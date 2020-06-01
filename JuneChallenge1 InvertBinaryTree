@@ -1,0 +1,44 @@
+Invert a binary tree.
+
+Example:
+
+Input:
+
+     4
+   /   \
+  2     7
+ / \   / \
+1   3 6   9
+Output:
+
+     4
+   /   \
+  7     2
+ / \   / \
+9   6 3   1
+
+
+
+
+CODE:
+
+class Solution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if root:
+            if root.left and root.right:
+                temp=root.left
+                root.left=root.right
+                root.right=temp
+                self.invertTree(root.left)
+                self.invertTree(root.right)
+            elif root.left:
+                root.right=root.left
+                root.left=None
+                self.invertTree(root.left)
+                self.invertTree(root.right)
+            else:
+                root.left=root.right
+                root.right=None
+                self.invertTree(root.left)
+                self.invertTree(root.right)
+        return root   
