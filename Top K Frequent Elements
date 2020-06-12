@@ -1,0 +1,29 @@
+Given a non-empty array of integers, return the k most frequent elements.
+
+Example 1:
+
+Input: nums = [1,1,1,2,2,3], k = 2
+Output: [1,2]
+Example 2:
+
+Input: nums = [1], k = 1
+Output: [1]
+
+
+CODE:
+
+from collections import defaultdict as dd
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        res=[]
+        d=dd(int)
+        for i in nums:
+            d[i]+=1
+        d=sorted(d.items(),key=lambda x:x[1],reverse=True)
+        for i,j in d:
+            if k>0:
+                res.append(i)
+                k-=1
+            else:
+                break
+        return res
